@@ -1,21 +1,15 @@
-# A dockerfile must always start by importing the base image.
-# We use the keyword 'FROM' to do that.
-# In our example, we want import the python image.
-# So we write 'python' for the image name and 'latest' for the version.
+# Use a Python base image
 FROM python:latest
 
-# In order to launch our python code, we must import it into our image.
-# We use the keyword 'COPY' to do that.
-# The first parameter 'main.py' is the name of the file on the host.
-# The second parameter '/' is the path where to put the file on the image.
-# Here we put the file at the image root folder.
-COPY excel_combine.py /
-COPY requirements.txt requirements.txt
+# Set the working directory inside the container
+WORKDIR /myapp
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Copy the application code and directories with Excel files into the container
+COPY . .
 
-# We need to define the command to launch when we are going to run the image.
-# We use the keyword 'CMD' to do that.
-# The following command will execute "python ./main.py".
-CMD [ "python", "./excel_combine.py" ]
+# Install any necessary dependencies specified in requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Define the default command to run the script
+CMD ["python3", "excel_combine.py"]
