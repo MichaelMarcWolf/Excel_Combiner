@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Define the default command to run the script
-CMD ["python3", "excel_combine.py"]
+CMD ["python3", "main.py"]
