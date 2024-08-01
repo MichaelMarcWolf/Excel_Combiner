@@ -5,18 +5,21 @@ def combine_excel_files(folder_path):
     # List to hold dataframes
     df_list = []
     print(folder_path)
-    print(os.listdir(folder_path))
 
     # Iterate over all files in the folder
     for filename in os.listdir(folder_path):
-        print(filename)
         
         # Construct full file path
         file_path = os.path.join(folder_path, filename)
         print(file_path)
         # Read the Excel file
-        df = pd.read_excel(file_path)
-        print("okok")
+        try:
+            df = pd.read_excel(file_path, engine='openpyxl')
+        except:
+            try: 
+                df = pd.read_excel(file_path, engine='xlrd')
+            except: 
+                print("Not imported: " + filename)
         # Add a column for the file name
         df['FileName'] = filename
 
