@@ -4,6 +4,7 @@ from excel_combine import  combine_excel_files
 
 # Specify the folder path containing the Excel files
 folder_path = 'excel_files'
+#folder_path = 'test_files'
 print(folder_path)
 
 # Combine the Excel files
